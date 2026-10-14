@@ -1,0 +1,6 @@
+{
+  "name": "Flat & Apartment Maintenance Portal",
+  "description": "Production-ready apartment and flat maintenance management website with real-time financial tracking, member directory, transparent collections and expenses, and secure admin controls.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
