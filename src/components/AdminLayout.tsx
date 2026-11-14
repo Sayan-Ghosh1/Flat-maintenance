@@ -181,7 +181,7 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
       </aside>
 
       {/* Mobile Top Header */}
-      <div className="md:hidden sticky top-0 z-40 bg-slate-950/95 border-b border-slate-800 backdrop-blur-xl px-4 py-3 flex items-center justify-between">
+      <div className="md:hidden sticky top-0 z-50 bg-slate-950/95 border-b border-slate-800 backdrop-blur-xl px-4 py-3 flex items-center justify-between">
         <div className="flex items-center space-x-2.5">
           <div className="w-8 h-8 rounded-lg bg-slate-900 border border-slate-700/60 overflow-hidden flex items-center justify-center text-white shrink-0">
             <img
@@ -213,82 +213,86 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({
             <ExternalLink className="w-4 h-4" />
           </Link>
           <button
+            type="button"
             onClick={() => setMobileNavOpen(!mobileNavOpen)}
-            className="p-2 rounded-lg bg-slate-900 text-slate-400 hover:text-white border border-slate-800"
+            aria-label="Toggle admin navigation menu"
+            aria-expanded={mobileNavOpen}
+            className="p-2 rounded-lg bg-slate-900 text-slate-300 hover:text-white border border-slate-700/80"
           >
             {mobileNavOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
-      </div>
 
-      {/* Mobile Menu Dropdown */}
-      {mobileNavOpen && (
-        <div className="md:hidden border-b border-slate-800 bg-slate-950 px-4 py-3 space-y-1">
-          {adminNav.map((item) => {
-            const Icon = item.icon;
-            const active = isActive(item.path);
-            return (
+        {/* Mobile Menu Dropdown */}
+        {mobileNavOpen && (
+          <div className="absolute top-full left-0 right-0 z-50 border-b border-slate-800 bg-slate-950/98 backdrop-blur-2xl px-4 py-3 space-y-1 shadow-2xl shadow-black/80 max-h-[calc(100vh-4rem)] overflow-y-auto">
+            {adminNav.map((item) => {
+              const Icon = item.icon;
+              const active = isActive(item.path);
+              return (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  onClick={() => setMobileNavOpen(false)}
+                  className={`flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm font-medium ${
+                    active
+                      ? 'text-white bg-indigo-600/20 text-indigo-300 border border-indigo-500/30'
+                      : 'text-slate-300 hover:bg-slate-900'
+                  }`}
+                >
+                  <Icon className="w-4 h-4" />
+                  <span>{item.label}</span>
+                </Link>
+              );
+            })}
+            
+            {/* Mobile Quick Action Buttons */}
+            <div className="pt-2 border-t border-slate-800 space-y-1.5">
+              <span className="block px-3 text-3xs font-bold text-slate-400 uppercase tracking-widest">
+                Direct Actions
+              </span>
               <Link
-                key={item.path}
-                to={item.path}
+                to="/admin/members?add=true"
                 onClick={() => setMobileNavOpen(false)}
-                className={`flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm font-medium ${
-                  active
-                    ? 'text-white bg-indigo-600/20 text-indigo-300 border border-indigo-500/30'
-                    : 'text-slate-300 hover:bg-slate-900'
-                }`}
+                className="flex items-center space-x-2.5 px-3 py-2 rounded-xl text-xs font-bold text-white bg-indigo-600/30 border border-indigo-500/40"
               >
-                <Icon className="w-4 h-4" />
-                <span>{item.label}</span>
+                <PlusCircle className="w-4 h-4 text-indigo-400" />
+                <span>+ Add Member</span>
               </Link>
-            );
-          })}
-          
-          {/* Mobile Quick Action Buttons */}
-          <div className="pt-2 border-t border-slate-800 space-y-1.5">
-            <span className="block px-3 text-3xs font-bold text-slate-400 uppercase tracking-widest">
-              Direct Actions
-            </span>
-            <Link
-              to="/admin/members?add=true"
-              onClick={() => setMobileNavOpen(false)}
-              className="flex items-center space-x-2.5 px-3 py-2 rounded-xl text-xs font-bold text-white bg-indigo-600/30 border border-indigo-500/40"
-            >
-              <PlusCircle className="w-4 h-4 text-indigo-400" />
-              <span>+ Add Member</span>
-            </Link>
-            <Link
-              to="/admin/payments?add=true"
-              onClick={() => setMobileNavOpen(false)}
-              className="flex items-center space-x-2.5 px-3 py-2 rounded-xl text-xs font-bold text-white bg-emerald-600/30 border border-emerald-500/40"
-            >
-              <PlusCircle className="w-4 h-4 text-emerald-400" />
-              <span>+ Record Payment</span>
-            </Link>
-            <Link
-              to="/admin/expenses?add=true"
-              onClick={() => setMobileNavOpen(false)}
-              className="flex items-center space-x-2.5 px-3 py-2 rounded-xl text-xs font-bold text-white bg-rose-600/30 border border-rose-500/40"
-            >
-              <PlusCircle className="w-4 h-4 text-rose-400" />
-              <span>+ Add Expense</span>
-            </Link>
-          </div>
+              <Link
+                to="/admin/payments?add=true"
+                onClick={() => setMobileNavOpen(false)}
+                className="flex items-center space-x-2.5 px-3 py-2 rounded-xl text-xs font-bold text-white bg-emerald-600/30 border border-emerald-500/40"
+              >
+                <PlusCircle className="w-4 h-4 text-emerald-400" />
+                <span>+ Record Payment</span>
+              </Link>
+              <Link
+                to="/admin/expenses?add=true"
+                onClick={() => setMobileNavOpen(false)}
+                className="flex items-center space-x-2.5 px-3 py-2 rounded-xl text-xs font-bold text-white bg-rose-600/30 border border-rose-500/40"
+              >
+                <PlusCircle className="w-4 h-4 text-rose-400" />
+                <span>+ Add Expense</span>
+              </Link>
+            </div>
 
-          <div className="pt-2 border-t border-slate-800">
-            <button
-              onClick={() => {
-                setMobileNavOpen(false);
-                handleSignOut();
-              }}
-              className="w-full flex items-center justify-center space-x-2 py-2 text-xs font-semibold text-rose-400 hover:bg-rose-950/20 rounded-lg"
-            >
-              <LogOut className="w-3.5 h-3.5" />
-              <span>Sign Out</span>
-            </button>
+            <div className="pt-2 border-t border-slate-800">
+              <button
+                type="button"
+                onClick={() => {
+                  setMobileNavOpen(false);
+                  handleSignOut();
+                }}
+                className="w-full flex items-center justify-center space-x-2 py-2 text-xs font-semibold text-rose-400 hover:bg-rose-950/20 rounded-lg"
+              >
+                <LogOut className="w-3.5 h-3.5" />
+                <span>Sign Out</span>
+              </button>
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
 
       {/* Main Admin Content Body */}
       <main className="flex-1 min-w-0 p-4 sm:p-8 lg:p-10 max-w-7xl relative z-10">
