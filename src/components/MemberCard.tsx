@@ -44,30 +44,8 @@ export const MemberCard: React.FC<MemberCardProps> = ({ member }) => {
           </div>
         </div>
 
-        {/* 3 Metrics Mini Grid */}
-        <div className="mt-5 grid grid-cols-3 gap-2 py-3 px-3.5 rounded-xl bg-slate-950/70 border border-slate-800/70 text-center">
-          <div>
-            <span className="block text-3xs uppercase tracking-wider font-semibold text-slate-400">Total Paid</span>
-            <span className="text-xs sm:text-sm font-bold text-emerald-400 font-mono">
-              {formatCurrency(member.total_paid || 0)}
-            </span>
-          </div>
-          <div>
-            <span className="block text-3xs uppercase tracking-wider font-semibold text-slate-400">This Year</span>
-            <span className="text-xs sm:text-sm font-semibold text-slate-200 font-mono">
-              {formatCurrency(member.current_year_paid || 0)}
-            </span>
-          </div>
-          <div>
-            <span className="block text-3xs uppercase tracking-wider font-semibold text-slate-400">This Month</span>
-            <span className="text-xs sm:text-sm font-semibold text-cyan-300 font-mono">
-              {formatCurrency(member.current_month_paid || 0)}
-            </span>
-          </div>
-        </div>
-
-        {/* Clearance Ledger Status Bar without unwanted advance badges */}
-        <div className="mt-3.5 flex items-center justify-between text-xs text-slate-400 px-1 pt-2 border-t border-slate-800/60">
+        {/* Clearance Ledger Status Bar */}
+        <div className="mt-4 flex items-center justify-between text-xs text-slate-400 pt-3 border-t border-slate-800/60">
           <div className="flex items-center space-x-1.5 truncate">
             <Calendar className="w-3.5 h-3.5 text-indigo-400 shrink-0" />
             <span className="truncate text-slate-300 font-medium text-xs">

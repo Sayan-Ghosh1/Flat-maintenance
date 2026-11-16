@@ -5,7 +5,6 @@ import { useMaintenanceData } from '../hooks/useMaintenanceData';
 import { MemberCard } from '../components/MemberCard';
 import { EmptyState } from '../components/EmptyState';
 import { LoadingSpinner } from '../components/LoadingSpinner';
-import { formatCurrency, formatDate } from '../lib/formatters';
 
 export const Members: React.FC = () => {
   const { loading, members } = useMaintenanceData();
@@ -147,11 +146,7 @@ export const Members: React.FC = () => {
                   <tr className="border-b border-slate-800/80 bg-slate-950/50 text-2xs font-semibold uppercase tracking-wider text-slate-400">
                     <th className="py-4 px-6">Flat</th>
                     <th className="py-4 px-6">Member</th>
-                    <th className="py-4 px-6 text-right">Total Paid</th>
-                    <th className="py-4 px-6 text-right">This Year</th>
-                    <th className="py-4 px-6 text-right">This Month</th>
-                    <th className="py-4 px-6">Last Payment</th>
-                    <th className="py-4 px-4 text-center">Action</th>
+                    <th className="py-4 px-6 text-right">Action</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-800/60 text-sm">
@@ -184,19 +179,7 @@ export const Members: React.FC = () => {
                           <span>{member.clearance_summary?.paidThroughText || 'Not cleared yet'}</span>
                         </div>
                       </td>
-                      <td className="py-4 px-6 text-right font-bold text-emerald-400 whitespace-nowrap">
-                        {formatCurrency(member.total_paid || 0)}
-                      </td>
-                      <td className="py-4 px-6 text-right font-semibold text-slate-200 whitespace-nowrap">
-                        {formatCurrency(member.current_year_paid || 0)}
-                      </td>
-                      <td className="py-4 px-6 text-right font-semibold text-indigo-300 whitespace-nowrap">
-                        {formatCurrency(member.current_month_paid || 0)}
-                      </td>
-                      <td className="py-4 px-6 text-slate-300 whitespace-nowrap text-xs">
-                        {member.last_payment_date ? formatDate(member.last_payment_date) : '—'}
-                      </td>
-                      <td className="py-4 px-4 text-center">
+                      <td className="py-4 px-6 text-right">
                         <Link
                           to={`/members/${member.id}`}
                           className="inline-flex items-center space-x-1 px-3 py-1.5 rounded-lg text-xs font-medium text-indigo-300 bg-indigo-950/60 hover:bg-indigo-900/60 border border-indigo-800/40 transition-colors"

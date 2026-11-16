@@ -218,8 +218,8 @@ export const MemberDetails: React.FC = () => {
       </div>
 
       {/* 1. Member Identity & Flat Information */}
-      <div className="rounded-3xl p-6 sm:p-8 bg-gradient-to-br from-slate-900/90 via-slate-900/60 to-slate-950 border border-slate-800/80 backdrop-blur-xl shadow-xl space-y-6">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-800/80">
+      <div className="rounded-3xl p-6 sm:p-8 bg-gradient-to-br from-slate-900/90 via-slate-900/60 to-slate-950 border border-slate-800/80 backdrop-blur-xl shadow-xl">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="flex items-center space-x-4">
             <div className="w-16 h-16 rounded-2xl bg-indigo-600/20 border border-indigo-500/30 text-indigo-300 font-extrabold flex items-center justify-center text-xl shadow-inner">
               {member.flat_number}
@@ -251,39 +251,6 @@ export const MemberDetails: React.FC = () => {
             <span className="text-3xs text-slate-400 block mt-0.5">
               Real-time Monthly Maintenance
             </span>
-          </div>
-        </div>
-
-        {/* 2. Basic Totals: Total Paid / Current Year Paid / Current Month Paid */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div className="p-4 rounded-2xl bg-slate-950/60 border border-slate-800/80">
-            <span className="text-xs uppercase tracking-wider font-semibold text-slate-400 block mb-1">
-              Total Lifetime Paid
-            </span>
-            <p className="text-2xl font-black text-emerald-400 font-mono">
-              {formatCurrency(member.total_paid || 0)}
-            </p>
-            <span className="text-2xs text-slate-400">Total verified transactions</span>
-          </div>
-
-          <div className="p-4 rounded-2xl bg-slate-950/60 border border-slate-800/80">
-            <span className="text-xs uppercase tracking-wider font-semibold text-slate-400 block mb-1">
-              Current Year Paid
-            </span>
-            <p className="text-2xl font-bold text-slate-200 font-mono">
-              {formatCurrency(member.current_year_paid || 0)}
-            </p>
-            <span className="text-2xs text-slate-400">Maintenance for {new Date().getFullYear()}</span>
-          </div>
-
-          <div className="p-4 rounded-2xl bg-slate-950/60 border border-slate-800/80">
-            <span className="text-xs uppercase tracking-wider font-semibold text-slate-400 block mb-1">
-              Current Month Paid
-            </span>
-            <p className="text-2xl font-bold text-indigo-300 font-mono">
-              {formatCurrency(member.current_month_paid || 0)}
-            </p>
-            <span className="text-2xs text-slate-400">Current calendar month</span>
           </div>
         </div>
       </div>
